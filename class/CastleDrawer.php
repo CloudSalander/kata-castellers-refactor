@@ -2,10 +2,11 @@
 
 class CastleDrawer {
 
+    //TODO maybe we can use enums here
     const PERSON = "|";
-    const PINYA_LENGTH = 20;
-    const FOLRE_LENGTH = 16;
-    const MANILLES_LENGTH = 12;
+    const PINYA = ["length":20, "offset":0];
+    const FOLRE = ["length":16, "offset":2];
+    const MANILLES = ["length":12, "offset":4];
     const VALID_INPUT_FOLREMANILLES = ["y","n"];
 
     private int $floorsNumber;
@@ -42,6 +43,7 @@ class CastleDrawer {
     public function inputHasManilles(): void {
         $hasManilles = false;
         do {
+            //TODO: pass input to strolower, not just compare.
             $hasManilles = readline("Has manilles?(y/n)");
         }while(!in_array(strtolower($hasManilles), self::VALID_INPUT_FOLREMANILLES)); 
         $this->hasManilles = $hasManilles=="y"?true:false;
@@ -97,6 +99,13 @@ class CastleDrawer {
             echo self::PERSON;
         }
         echo PHP_EOL;
+    }
+
+    private function drawRow(array $rowType): void {
+        echo str_repeat($rowType['offset']);
+        for($i = 0; $i < $rowType['length']; ++$i) {
+            echo $self::PERSON;
+        }
     }
 
     
